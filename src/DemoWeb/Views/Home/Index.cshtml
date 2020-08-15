@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .disp {
+        min-height: 28px;
+        padding: 2px;
+    }
+    .clearfix:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+    .disp .tag {
+        float: left;
+        border: 1px solid gray;
+        padding: 3px;
+        margin-right: 3px;
+        display: block;
+        background-color: #aaa;
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        font-size: 8px;
+    }
+</style>
+
+<h2>Web Stats Demo</h2>
+<button data-action="BusyLoop">Busy Loop 5s</button>
+<button data-action="UseMemory">Eat 8MB bytes</button>
+<div class="disp clearfix"></div>
+<iframe src="~/WebStats" style="border: none; width: 180px; height: 80px; margin-top: 6px; display: block;">
+</iframe>
+
+@section Scripts {
+    <script>
+        $("button").click(function () {
+            var action = $(this).data("action");
+            var url = "@Url.Content("~/Home/")" + action; 
+            var tag = $("<span class='tag'>" + action + "</span>");
+            tag.appendTo($(".disp"));
+            $.post(url).always(function () {
+                tag.remove();
+            });
+    });
+    </script>
+}
+
+
+
