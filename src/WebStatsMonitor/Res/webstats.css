@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: LCD;
-    src: url('fonts/DS-DIGI.TTF');
+    src: url('~/WebStatsMonitor/Resource?resName=DS-DIGI.TTF');
 }
 
 .frame .field {

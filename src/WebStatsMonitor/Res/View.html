@@ -1,15 +1,11 @@
 ﻿
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Web CPU & Memory</title>
-    <link href="~/Content/webstats.css" rel="stylesheet" />
+    <link href="~/WebStatsMonitor/Resource?resName=webstats.css" rel="stylesheet" />
 </head>
 <body>
     <div class="frame">
@@ -20,12 +16,12 @@
             <span class="hdr">RAM</span> <span class="field" id="memUsage"></span>
         </div>
     </div>
-    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/WebStatsMonitor/Resource?resName=jquery.min.js"></script>
     <script>
         $(function () {
             //TODO 實際運用時改走 SignalR/WebSocket 較有效率
             function refresh() {
-                $.getJSON("@Url.Content("~/WebStats/Stats")").done(function (res) {
+                $.getJSON("~/WebStatsMonitor/Stats").done(function (res) {
                     var cpuCss = "";
                     var cpuValue = parseInt(res.CPU.replace("%"));
                     if (cpuValue > 85) cpuCss = "alert";

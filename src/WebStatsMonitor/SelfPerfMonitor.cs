@@ -6,7 +6,7 @@ using System.Linq;
 using System.Timers;
 using System.Web;
 
-namespace DemoWeb.Models
+namespace WebStatsMonitor
 {
     public class SelfPerfMonitor
     {
