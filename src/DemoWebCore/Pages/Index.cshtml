@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<style>
+    .disp {
+        min-height: 28px;
+        padding: 2px;
+    }
+
+    .clearfix:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+
+    .disp .tag {
+        float: left;
+        border: 1px solid gray;
+        padding: 3px;
+        margin-right: 3px;
+        display: block;
+        background-color: #aaa;
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        font-size: 8px;
+    }
+</style>
+
+<h2>Web Stats Demo</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <button data-action="BusyLoop" type="button">Busy Loop 5s</button>
+    <button data-action="UseMemory" type="button">Eat 8MB bytes</button>
+    <div class="disp clearfix"></div>
+}
+<iframe src="~/WebStatsMonitor" style="border: none; width: 180px; height: 80px; margin-top: 6px; display: block;">
+</iframe>
+
+@section Scripts {
+    <script>
+        $("button").click(function () {
+            var action = $(this).data("action");
+            var url = "Index?handler=" + action;
+            var tag = $("<span class='tag'>" + action + "</span>");
+            tag.appendTo($(".disp"));
+            $.post(url, {
+                __RequestVerificationToken:
+                    $('input:hidden[name="__RequestVerificationToken"]').val()
+            }).always(function () {
+                tag.remove();
+            });
+        });
+    </script>
+}
