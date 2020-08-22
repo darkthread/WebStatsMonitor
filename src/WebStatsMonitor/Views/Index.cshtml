@@ -1,0 +1,28 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Web CPU & Memory</title>
+    <link href="~/WebStatsMonitor/Resource?resName=webstats.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="frame">
+        <div class="row">
+            <span class="hdr">CPU</span> <span class="field" id="cpuLoad"></span>
+        </div>
+        <div class="row">
+            <span class="hdr">RAM</span> <span class="field" id="memUsage"></span>
+        </div>
+    </div>
+    <script src="~/WebStatsMonitor/Resource?resName=jquery.min.js"></script>
+    @*沒什麼意義的 PartialView 拆分，只是為了證明存成內嵌資源也辦得到*@
+    @Html.Partial("~/EmbViews/Partials/_Script.cshtml")
+</body>
+</html>

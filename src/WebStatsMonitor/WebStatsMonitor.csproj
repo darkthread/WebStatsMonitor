@@ -63,17 +63,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmbResVirtualFile.cs" />
+    <Compile Include="EmbResVirtualPathProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelfPerfMonitor.cs" />
     <Compile Include="WebStatsController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Res\jquery.min.js" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Views\Index.cshtml" />
     <EmbeddedResource Include="Res\DS-DIGI.TTF" />
-    <EmbeddedResource Include="Res\View.html" />
+    <EmbeddedResource Include="Views\Partials\_Script.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Res\jquery.min.js" />
     <EmbeddedResource Include="Res\webstats.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

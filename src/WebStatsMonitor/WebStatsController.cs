@@ -13,7 +13,7 @@ namespace WebStatsMonitor
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Resource", new { resName = "View.html" });
+            return View("~/EmbViews/Index.cshtml");
         }
 
         public ActionResult Stats()

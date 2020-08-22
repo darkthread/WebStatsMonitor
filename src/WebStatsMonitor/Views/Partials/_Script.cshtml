@@ -1,0 +1,20 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+<script>
+    $(function () {
+        //TODO 實際運用時改走 SignalR/WebSocket 較有效率
+        function refresh() {
+            $.getJSON("@Url.Content("~/WebStatsMonitor/Stats")").done(function (res) {
+                var cpuCss = "";
+                var cpuValue = parseInt(res.CPU.replace("%"));
+                if (cpuValue > 85) cpuCss = "alert";
+                else if (cpuValue > 50) cpuCss = "warn";
+                $("#cpuLoad").text(res.CPU).attr("data-tag", cpuCss);
+                $("#memUsage").text(res.RAM);
+            });
+        }
+        refresh();
+        setInterval(refresh, 2000);
+    });
+</script>
