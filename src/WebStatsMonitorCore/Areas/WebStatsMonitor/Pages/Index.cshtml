@@ -1,0 +1,42 @@
+﻿@page
+@model WebStatsMonitorCore.Areas.WebStatsMonitor.Pages.IndexModel
+@{
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Web CPU & Memory</title>
+    <link href="~/_content/WebStatsMonitorCore/webstats.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="frame">
+        <div class="row">
+            <span class="hdr">CPU</span> <span class="field" id="cpuLoad"></span>
+        </div>
+        <div class="row">
+            <span class="hdr">RAM</span> <span class="field" id="memUsage"></span>
+        </div>
+    </div>
+    <script src="~/_content/WebStatsMonitorCore/jquery.min.js"></script>
+    <script>
+        $(function () {
+            //TODO 實際運用時改走 SignalR/WebSocket 較有效率
+            function refresh() {
+                $.getJSON("@Url.Content("?handler=Stats")").done(function (res) {
+                    var cpuCss = "";
+                    var cpuValue = parseInt(res.CPU.replace("%"));
+                    if (cpuValue > 85) cpuCss = "alert";
+                    else if (cpuValue > 50) cpuCss = "warn";
+                    $("#cpuLoad").text(res.CPU).attr("data-tag", cpuCss);
+                    $("#memUsage").text(res.RAM);
+                });
+            }
+            refresh();
+            setInterval(refresh, 2000);
+        });
+
+    </script>
+</body>
+</html>
